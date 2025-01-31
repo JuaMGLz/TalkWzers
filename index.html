@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- Definimos el idioma de la página como español -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Codificación de caracteres para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
+    
+    <title>TalkWzers</title> <!-- Título de la página en la pestaña del navegador -->
+
+    <style>
+        /* Estilos generales del cuerpo de la página */
+        body {
+            background-color: #000000; /* Fondo negro para estética neon */
+            color: #ffffff; /* Texto blanco para contraste */
+            font-family: Arial, sans-serif; /* Fuente genérica y fácil de leer */
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* Permite el desplazamiento vertical si el contenido crece */
+        }
+
+        /* Estilos de la barra de navegación */
+        .navbar {
+            background-color: #800020; /* Color vino para la barra superior */
+            padding: 15px;
+            display: flex; /* Distribuye los elementos en una línea */
+            justify-content: space-between; /* Espacia los elementos uniformemente */
+            align-items: center; /* Alinea verticalmente */
+        }
+
+        /* Estilos para el logo */
+        .logo {
+            width: 120px;  /* Ancho del logo */
+            height: auto; /* Mantiene la proporción de la imagen */
+            margin-right: 15px; /* Espacio entre el logo y el texto */
+        }
+
+        /* Estilos para el título dentro de la barra */
+        .navbar h1 {
+            color: #00FFFF; /* Azul neón para el título */
+            margin: 0; /* Elimina márgenes adicionales */
+            font-size: 50px; /* Tamaño del texto */
+            font-family: 'Courier New', serif; /* Cambia el tipo de letra a Courier New */
+            display: flex;
+            align-items: center; /* Centra verticalmente con la imagen */
+        }
+
+        /* Estilos del menú de navegación */
+        .navbar .menu {
+            display: flex; /* Acomoda los enlaces en una sola fila */
+            gap: 15px; /* Espacio entre elementos */
+        }
+
+        /* Estilos para los enlaces del menú */
+        .navbar a {
+            color: #00FFFF; /* Texto blanco */
+            text-decoration: none; /* Quita el subrayado */
+            font-size: 18px; /* Tamaño del texto */
+            font-family: 'Arial', serif; /* Cambia el tipo de letra a Courier New */
+            padding: 10px 15px; /* Espaciado interno */
+            border: 2px solid #00FFFF; /* Borde neón */
+            border-radius: 5px; /* Bordes redondeados */
+            transition: 0.3s; /* Suaviza el cambio de color */
+        }
+
+        /* Efecto cuando se pasa el mouse sobre los enlaces */
+        .navbar a:hover {
+            background-color: #1fcaca; /* Fondo azul neón */
+            color: #000000; /* Texto negro para contraste */
+        }
+
+        /* Contenido principal de la página */
+        .content {
+            padding: 20px;
+            text-align: center;
+            min-height: 100vh; /* Asegura que el contenido tenga al menos la altura de la pantalla */
+        }
+
+        /* Sección adicional de contenido para demostrar desplazamiento */
+        .extra-content {
+            height: 2000px; /* Altura extra para generar desplazamiento */
+            background: linear-gradient(to bottom, #000000, #800020); /* Efecto de degradado */
+        }
+
+        /* Diseño responsivo: Ajustes para pantallas pequeñas (móviles) */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; /* Apila los elementos en lugar de alinearlos horizontalmente */
+                align-items: center; /* Centra los elementos */
+                text-align: center; /* Alinea el texto al centro */
+            }
+
+            .navbar h1 {
+                margin-top: 10px; /* Espacio extra en pantallas pequeñas */
+            }
+
+            .menu {
+                flex-direction: column; /* Apila los enlaces verticalmente */
+                gap: 10px; /* Espaciado entre los enlaces */
+                width: 100%; /* Ocupa todo el ancho disponible */
+                text-align: center; /* Centra los elementos */
+            }
+
+            .navbar a {
+                display: block; /* Hace que los enlaces ocupen todo el ancho */
+                width: 80%; /* Ajusta el ancho de los botones */
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Barra de navegación con el logo, título y menú -->
+    <header class="navbar">
+        <img src="Img/Logo.png" alt="Logo" class="logo"> <!-- Imagen del logo -->
+        <h1>Desbloquea tu inglés</h1> <!-- Título de la página -->
+        <nav class="menu"> <!-- Menú de navegación -->
+            <a href="#">Iniciar Sesión</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="#">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Contenedor principal del contenido -->
+    <div class="content">
+        <h2>Bienvenido a TalkWzers.</h2>
+        <p>Aquí encontrarás el dominio de inglés que tanto buscabas.</p>
+    </div>
+
+    <!-- Sección de contenido adicional para generar desplazamiento -->
+    <div class="extra-content"></div> <!-- Bloque de 2000px para probar el scroll -->
+
+</body>
+
+</html>
