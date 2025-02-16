@@ -1,137 +1,499 @@
 <!DOCTYPE html>
-<html lang="es"> <!-- Definimos el idioma de la página como español -->
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8"> <!-- Codificación de caracteres para admitir acentos y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <!-- Hace que el diseño sea responsivo en dispositivos móviles -->
-    
-    <title>TalkWzers</title> <!-- Título de la página en la pestaña del navegador -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalkWzers</title>
 
     <style>
-        /* Estilos generales del cuerpo de la página */
+        /* ------------------------------- */
+        /* ESTILOS GENERALES */
+        /* ------------------------------- */
         body {
-            background-color: #000000; /* Fondo negro para estética neon */
-            color: #ffffff; /* Texto blanco para contraste */
-            font-family: Arial, sans-serif; /* Fuente genérica y fácil de leer */
+            background-color: #000000; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+            font-family: Arial, sans-serif; /* Fuente predeterminada */
             margin: 0;
             padding: 0;
-            overflow-y: auto; /* Permite el desplazamiento vertical si el contenido crece */
+            overflow-y: auto; /* Permite el scroll vertical */
         }
 
-        /* Estilos de la barra de navegación */
+        /* ------------------------------- */
+        /* BARRA DE NAVEGACIÓN */
+        /* ------------------------------- */
         .navbar {
-            background-color: #800020; /* Color vino para la barra superior */
+            background-color: #800020; /* Color de fondo de la barra de navegación */
             padding: 15px;
-            display: flex; /* Distribuye los elementos en una línea */
-            justify-content: space-between; /* Espacia los elementos uniformemente */
-            align-items: center; /* Alinea verticalmente */
-        }
-
-        /* Estilos para el logo */
-        .logo {
-            width: 120px;  /* Ancho del logo */
-            height: auto; /* Mantiene la proporción de la imagen */
-            margin-right: 15px; /* Espacio entre el logo y el texto */
-        }
-
-        /* Estilos para el título dentro de la barra */
-        .navbar h1 {
-            color: #00FFFF; /* Azul neón para el título */
-            margin: 0; /* Elimina márgenes adicionales */
-            font-size: 50px; /* Tamaño del texto */
-            font-family: 'Courier New', serif; /* Cambia el tipo de letra a Courier New */
             display: flex;
-            align-items: center; /* Centra verticalmente con la imagen */
+            justify-content: space-between; /* Espacio entre elementos */
+            align-items: center; /* Centra verticalmente los elementos */
         }
 
-        /* Estilos del menú de navegación */
-        .navbar .menu {
-            display: flex; /* Acomoda los enlaces en una sola fila */
-            gap: 15px; /* Espacio entre elementos */
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-right: 15px;
         }
 
-        /* Estilos para los enlaces del menú */
+        .navbar h1 {
+            color: #00FFFF; /* Color del título */
+            margin: 0;
+            font-size: 50px;
+            font-family: 'Courier New', serif; /* Fuente específica para el título */
+            display: flex;
+            align-items: center;
+        }
+
+        .menu {
+            display: flex;
+            gap: 15px; /* Espacio entre los enlaces del menú */
+        }
+
         .navbar a {
-            color: #00FFFF; /* Texto blanco */
-            text-decoration: none; /* Quita el subrayado */
-            font-size: 18px; /* Tamaño del texto */
-            font-family: 'Arial', serif; /* Cambia el tipo de letra a Courier New */
-            padding: 10px 15px; /* Espaciado interno */
-            border: 2px solid #00FFFF; /* Borde neón */
+            color: #00FFFF; /* Color de los enlaces */
+            text-decoration: none; /* Sin subrayado */
+            font-size: 18px;
+            padding: 10px 15px;
+            border: 2px solid #00FFFF; /* Borde alrededor de los enlaces */
             border-radius: 5px; /* Bordes redondeados */
-            transition: 0.3s; /* Suaviza el cambio de color */
+            transition: 0.3s; /* Transición suave al hacer hover */
+            cursor: pointer;
         }
 
-        /* Efecto cuando se pasa el mouse sobre los enlaces */
         .navbar a:hover {
-            background-color: #1fcaca; /* Fondo azul neón */
-            color: #000000; /* Texto negro para contraste */
+            background-color: #1fcaca; /* Cambia el fondo al hacer hover */
+            color: #000000; /* Cambia el color del texto al hacer hover */
         }
 
-        /* Contenido principal de la página */
-        .content {
+        /* ------------------------------- */
+        /* MODAL - Ventana emergente */
+        /* ------------------------------- */
+        .modal {
+            display: none; /* Oculta el modal por defecto */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+        }
+
+        .modal-content {
+            background-color: #800020; /* Color de fondo del modal */
+            color: #00FFFF; /* Color del texto */
+            font-family: 'Courier New', serif; /* Fuente específica */
+            width: 40%; /* Ancho del modal */
+            max-height: 90vh; /* Altura máxima */
             padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
             text-align: center;
-            min-height: 100vh; /* Asegura que el contenido tenga al menos la altura de la pantalla */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centra el modal en la pantalla */
+            border: 2px solid #00FFFF; /* Borde alrededor del modal */
+            overflow-y: auto; /* Permite el scroll si el contenido es muy largo */
         }
 
-        /* Sección adicional de contenido para demostrar desplazamiento */
-        .extra-content {
-            height: 2000px; /* Altura extra para generar desplazamiento */
-            background: linear-gradient(to bottom, #000000, #800020); /* Efecto de degradado */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón de cerrar */
         }
 
-        /* Diseño responsivo: Ajustes para pantallas pequeñas (móviles) */
+        .options {
+            display: flex;
+            justify-content: center; /* Centra las opciones horizontalmente */
+            gap: 20px; /* Espacio entre las opciones */
+        }
+
+        .option {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra los elementos verticalmente */
+            text-align: center;
+            width: 120px;
+        }
+
+        .option img {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #00FFFF; /* Borde alrededor de las imágenes */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .option p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* ------------------------------- */
+        /* Estilos para el modal de ingreso */
+        /* ------------------------------- */
+        .ingreso-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra los elementos horizontalmente */
+            gap: 20px; /* Espacio entre los elementos */
+        }
+
+        .ingreso-container img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00FFFF; /* Borde alrededor de la imagen */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px;
+        }
+
+        .ingreso-form {
+            width: 100%;
+            text-align: center; /* Centra el contenido del formulario */
+        }
+
+        .ingreso-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px; /* Tamaño de los labels */
+        }
+
+        .ingreso-form input {
+            width: 80%; /* Ancho de los inputs */
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #00FFFF; /* Borde alrededor de los inputs */
+            border-radius: 5px; /* Bordes redondeados */
+            background-color: #000000; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+        }
+
+        .ingreso-form input[type="submit"] {
+            background-color: #00FFFF; /* Fondo del botón */
+            color: #000000; /* Color del texto */
+            border: none;
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            padding: 10px 20px;
+            font-weight: bold;
+            width: auto; /* Ancho automático */
+        }
+
+        .ingreso-form input[type="submit"]:hover {
+            background-color: #1fcaca; /* Cambia el fondo al hacer hover */
+        }
+
+        /* ------------------------------- */
+        /* Estilos para el modal de alumno y maestro */
+        /* ------------------------------- */
+        .alumno-container,
+        .maestro-container {
+            display: flex;
+            align-items: flex-start; /* Alinea los elementos al inicio */
+            gap: 20px; /* Espacio entre los elementos */
+        }
+
+        .alumno-icon,
+        .maestro-icon {
+            width: 120px;
+            text-align: center;
+            position: sticky; /* Mantiene el icono fijo al hacer scroll */
+            top: 0;
+        }
+
+        .alumno-icon img,
+        .maestro-icon img {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00FFFF; /* Borde alrededor de las imágenes */
+            border-radius: 10px; /* Bordes redondeados */
+            padding: 10px;
+        }
+
+        .alumno-form,
+        .maestro-form {
+            flex: 1; /* Ocupa el espacio restante */
+            text-align: left; /* Alinea el texto a la izquierda */
+        }
+
+        .alumno-form label,
+        .maestro-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .alumno-form input,
+        .alumno-form select,
+        .maestro-form input,
+        .maestro-form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #00FFFF; /* Borde alrededor de los inputs */
+            border-radius: 5px; /* Bordes redondeados */
+            background-color: #000000; /* Fondo negro */
+            color: #ffffff; /* Texto blanco */
+        }
+
+        .alumno-form input[type="submit"],
+        .maestro-form input[type="submit"] {
+            background-color: #00FFFF; /* Fondo del botón */
+            color: #000000; /* Color del texto */
+            border: none;
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+
+        .alumno-form input[type="submit"]:hover,
+        .maestro-form input[type="submit"]:hover {
+            background-color: #1fcaca; /* Cambia el fondo al hacer hover */
+        }
+
+        /* ------------------------------- */
+        /* ESTILO RESPONSIVO */
+        /* ------------------------------- */
         @media (max-width: 768px) {
             .navbar {
-                flex-direction: column; /* Apila los elementos en lugar de alinearlos horizontalmente */
-                align-items: center; /* Centra los elementos */
-                text-align: center; /* Alinea el texto al centro */
-            }
-
-            .navbar h1 {
-                margin-top: 10px; /* Espacio extra en pantallas pequeñas */
+                flex-direction: column; /* Cambia la dirección de la barra de navegación */
+                align-items: center;
+                text-align: center;
             }
 
             .menu {
-                flex-direction: column; /* Apila los enlaces verticalmente */
-                gap: 10px; /* Espaciado entre los enlaces */
-                width: 100%; /* Ocupa todo el ancho disponible */
-                text-align: center; /* Centra los elementos */
+                flex-direction: column; /* Cambia la dirección del menú */
+                gap: 10px;
+                width: 100%;
+                text-align: center;
             }
 
             .navbar a {
-                display: block; /* Hace que los enlaces ocupen todo el ancho */
-                width: 80%; /* Ajusta el ancho de los botones */
+                display: block;
+                width: 80%; /* Ancho de los enlaces en móviles */
+            }
+
+            .modal-content {
+                width: 90%; /* Ancho del modal en móviles */
+            }
+
+            .alumno-container,
+            .maestro-container {
+                flex-direction: column; /* Cambia la dirección de los contenedores */
+                align-items: center;
+            }
+
+            .alumno-icon,
+            .maestro-icon {
+                margin-bottom: 20px;
+                position: static; /* Elimina el posicionamiento sticky en móviles */
+            }
+
+            .ingreso-form input {
+                width: 90%; /* Ancho de los inputs en móviles */
             }
         }
     </style>
-
 </head>
 
 <body>
-
-    <!-- Barra de navegación con el logo, título y menú -->
+    <!-- ------------------------------- -->
+    <!-- BARRA DE NAVEGACIÓN -->
+    <!-- ------------------------------- -->
     <header class="navbar">
-        <img src="Img/Logo.png" alt="Logo" class="logo"> <!-- Imagen del logo -->
-        <h1>Desbloquea tu inglés</h1> <!-- Título de la página -->
-        <nav class="menu"> <!-- Menú de navegación -->
-            <a href="#">Iniciar Sesión</a>
+        <img src="Img/Logo.png" alt="Logo" class="logo">
+        <h1>Desbloquea tu inglés</h1>
+        <nav class="menu">
+            <a href="#" id="openModal">Iniciar Sesión</a>
             <a href="#">Sobre Nosotros</a>
             <a href="#">Contacto</a>
         </nav>
     </header>
 
-    <!-- Contenedor principal del contenido -->
-    <div class="content">
-        <h2>Bienvenido a TalkWzers.</h2>
-        <p>Aquí encontrarás el dominio de inglés que tanto buscabas.</p>
+    <!-- ------------------------------- -->
+    <!-- MODAL - VENTANA EMERGENTE 1 -->
+    <!-- ------------------------------- -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Elige una opción</h2>
+            <div class="options">
+                <!-- Opción de Iniciar Sesión -->
+                <div class="option">
+                    <img src="Img/IniSes.png" alt="Iniciar Sesión">
+                    <p>Ingresar</p>
+                </div>
+                <!-- Opción de Registro -->
+                <div class="option" onclick="changeModal('loginModal', 'modal2')">
+                    <img src="Img/regis.png" alt="Registrar">
+                    <p>Registrar</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Sección de contenido adicional para generar desplazamiento -->
-    <div class="extra-content"></div> <!-- Bloque de 2000px para probar el scroll -->
+    <!-- ------------------------------- -->
+    <!-- MODAL - VENTANA EMERGENTE 2 -->
+    <!-- ------------------------------- -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Elige tu rol</h2>
+            <div class="options">
+                <!-- Opción de Alumno -->
+                <div class="option" onclick="changeModal('modal2', 'modalAlumno')">
+                    <img src="Img/alu.png" alt="Alumno">
+                    <p>Alumno</p>
+                </div>
+                <!-- Opción de Maestro -->
+                <div class="option" onclick="changeModal('modal2', 'modalMaestro')">
+                    <img src="Img/maes.png" alt="Maestro">
+                    <p>Maestro</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- ------------------------------- -->
+    <!-- Tercer Modal - Registro de Alumno -->
+    <!-- ------------------------------- -->
+    <div id="modalAlumno" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalAlumno')">&times;</span>
+            <div class="alumno-container">
+                <!-- Icono de Alumno -->
+                <div class="alumno-icon">
+                    <img src="Img/alu.png" alt="Alumno">
+                </div>
+                <!-- Formulario de Registro -->
+                <div class="alumno-form">
+                    <h2>Registrar Alumno</h2>
+                    <form>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre"><br><br>
+                        <label for="apaterno">Apellido Paterno:</label>
+                        <input type="text" id="apaterno" name="apaterno"><br><br>
+                        <label for="amaterno">Apellido Materno:</label>
+                        <input type="text" id="amaterno" name="amaterno"><br><br>
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" name="correo"><br><br>
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" name="contraseña"><br><br>
+                        <label for="fnacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="fnacimiento" name="fnacimiento"><br><br>
+                        <label for="genero">Género:</label>
+                        <select id="genero" name="genero">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select><br><br>
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------- -->
+    <!-- Cuarto Modal - Registro de Maestro -->
+    <!-- ------------------------------- -->
+    <div id="modalMaestro" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalMaestro')">&times;</span>
+            <div class="maestro-container">
+                <!-- Icono de Maestro -->
+                <div class="maestro-icon">
+                    <img src="Img/maes.png" alt="Maestro">
+                </div>
+                <!-- Formulario de Registro -->
+                <div class="maestro-form">
+                    <h2>Registrar Maestro</h2>
+                    <form>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre"><br><br>
+                        <label for="apaterno">Apellido Paterno:</label>
+                        <input type="text" id="apaterno" name="apaterno"><br><br>
+                        <label for="amaterno">Apellido Materno:</label>
+                        <input type="text" id="amaterno" name="amaterno"><br><br>
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" name="correo"><br><br>
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" name="contraseña"><br><br>
+                        <label for="fnacimiento">Fecha de Nacimiento:</label>
+                        <input type="date" id="fnacimiento" name="fnacimiento"><br><br>
+                        <label for="genero">Género:</label>
+                        <select id="genero" name="genero">
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select><br><br>
+                        <label for="grado">Grado Académico:</label>
+                        <input type="text" id="grado" name="grado"><br><br>
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------- -->
+    <!-- Quinto Modal - Ingreso (Correo y Contraseña) -->
+    <!-- ------------------------------- -->
+    <div id="modalIngreso" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modalIngreso')">&times;</span>
+            <div class="ingreso-container">
+                <!-- Imagen central -->
+                <img src="Img/IniSes.png" alt="Ingreso">
+                <!-- Formulario de Ingreso -->
+                <div class="ingreso-form">
+                    <h2>Ingresar</h2>
+                    <form>
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" name="correo"><br><br>
+                        <label for="contraseña">Contraseña:</label>
+                        <input type="password" id="contraseña" name="contraseña"><br><br>
+                        <input type="submit" value="Ingresar">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------- -->
+    <!-- JAVASCRIPT PARA EL MODAL -->
+    <!-- ------------------------------- -->
+    <script>
+        // Abre el modal de inicio de sesión al hacer clic en "Iniciar Sesión"
+        document.getElementById("openModal").addEventListener("click", function () {
+            document.getElementById("loginModal").style.display = "block"; // Muestra el modal de inicio de sesión
+        });
+
+        // Abre el modal de "Ingresar" al hacer clic en la opción correspondiente
+        document.querySelector('.option img[alt="Iniciar Sesión"]').addEventListener('click', function () {
+            document.getElementById('modalIngreso').style.display = 'block'; // Muestra el modal de ingreso
+        });
+
+        // Función para cerrar el modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none"; // Oculta el modal con el ID proporcionado
+        }
+
+        // Cierra el modal si se hace clic fuera de él
+        window.onclick = function (event) {
+            if (event.target.classList.contains("modal")) { // Verifica si el clic fue en el fondo del modal
+                event.target.style.display = "none"; // Oculta el modal
+            }
+        };
+
+        // Función para cambiar de ventana (modal)
+        function changeModal(currentModal, nextModal) {
+            document.getElementById(currentModal).style.display = "none"; // Oculta el modal actual
+            document.getElementById(nextModal).style.display = "block"; // Muestra el siguiente modal
+        }
+    </script>
 </body>
 
 </html>
