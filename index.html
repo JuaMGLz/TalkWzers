@@ -26,15 +26,18 @@
         /* ------------------------------- */
         /* BARRA DE NAVEGACIÓN */
         /* ------------------------------- */
+
+
         .navbar {
-            background-color: #800020;
-            /* Color de fondo de la barra de navegación */
-            padding: 15px;
             display: flex;
-            justify-content: space-between;
-            /* Espacio entre elementos */
+            justify-content: center;
             align-items: center;
-            /* Centra verticalmente los elementos */
+            background-color: #800020;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
         }
 
         .logo {
@@ -377,14 +380,14 @@
         /* ------------------------------- */
         footer {
             background-color: #00FFFF;
-            /* Fondo azul */
             padding: 10px;
             text-align: center;
             position: fixed;
             bottom: 0;
             width: 100%;
             border-top: 2px solid #800020;
-            /* Borde superior rojo */
+            display: flex;
+            justify-content: center;
         }
 
         .carrusel {
@@ -421,6 +424,23 @@
         .carrusel:hover {
             animation-play-state: paused;
         }
+
+
+        /* ------------------------------- */
+        /* GIFT  */
+        /* ------------------------------- */
+        .gifs-container {
+            display: flex;
+            justify-content: center;
+            gap: 90px;
+            margin-top: 125px;
+            margin-bottom: 20px;
+        }
+
+        .gif {
+            width: 400px;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -448,22 +468,20 @@
             <img src="Img/videollamada.png" alt="Video Llamada">
             <img src="Img/aprender.png" alt="Aprender">
             <img src="Img/hablar.png" alt="Hablar">
-            <img src="Img/logo.png" alt="Logo">
             <!-- Repetir las imágenes para un efecto continuo -->
             <img src="Img/bandera.png" alt="Bandera">
             <img src="Img/videollamada.png" alt="Video Llamada">
             <img src="Img/aprender.png" alt="Aprender">
             <img src="Img/hablar.png" alt="Hablar">
-            <img src="Img/logo.png" alt="Logo">
         </div>
     </footer>
 
     <!-- ------------------------------- -->
     <!-- GIFs -->
     <!-- ------------------------------- -->
-    <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px;">
-        <img src="Img/hola.gif" alt="Hola" style="width: 400px; height: auto;">
-        <img src="Img/mundo.gif" alt="Mundo" style="width: 400px; height: auto;">
+    <div class="gifs-container">
+        <img src="Img/hola.gif" alt="Hola" class="gif">
+        <img src="Img/mundo.gif" alt="Mundo" class="gif">
     </div>
 
     <!-- ------------------------------- -->
