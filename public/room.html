@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Videollamada</title>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body style="background: black; color: white; text-align: center;">
+  <h1>Videollamada TalkWzers</h1>
+  <video id="my-video" autoplay muted></video>
+  <script>
+    const socket = io('/');
+    const videoGrid = document.body;
+    const myPeer = new Peer(undefined, {
+      host: '/',
+      port: location.port || (location.protocol === 'https:' ? 443 : 80),
+      path: '/peerjs'
+    });
+
+    const myVideo = document.getElementById('my-video');
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      myVideo.srcObject = stream;
+
+      myPeer.on('call', call => {
+        call.answer(stream);
+        const video = document.createElement('video');
+        call.on('stream', userVideoStream => {
+          video.srcObject = userVideoStream;
+          video.autoplay = true;
+          videoGrid.appendChild(video);
+        });
+      });
+
+      socket.on('user-connected', userId => {
+        const call = myPeer.call(userId, stream);
+        const video = document.createElement('video');
+        call.on('stream', userVideoStream => {
+          video.srcObject = userVideoStream;
+          video.autoplay = true;
+          videoGrid.appendChild(video);
+        });
+      });
+    });
+
+    myPeer.on('open', id => {
+      const roomId = prompt("Introduce el ID de sala:");
+      socket.emit('join-room', roomId, id);
+    });
+  </script>
+</body>
+</html>
